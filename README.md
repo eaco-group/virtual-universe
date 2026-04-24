@@ -22,6 +22,10 @@ DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
 
 https://orbmarkets.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
 
+https://www.orca.so/pools?tokens=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
+
+https://raydium.io/swap/?inputMint=sol&outputMint=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH
+
 https://discord.gg/HWsweV6fFy
 
 
