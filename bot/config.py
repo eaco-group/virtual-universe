@@ -21,6 +21,18 @@ class Settings:
     sqlite_path: str
     jupiter_quote_url: str
     jupiter_swap_url: str
+    bot_username: str
+    admin_ids: set[int]
+
+
+def parse_admin_ids(value: str) -> set[int]:
+    out: set[int] = set()
+    for x in value.split(","):
+        x = x.strip()
+        if not x:
+            continue
+        out.add(int(x))
+    return out
 
 
 def load_settings() -> Settings:
@@ -40,4 +52,6 @@ def load_settings() -> Settings:
         sqlite_path=os.getenv("SQLITE_PATH", "eaco_bot.db"),
         jupiter_quote_url=os.getenv("JUPITER_QUOTE_URL", "https://quote-api.jup.ag/v6/quote"),
         jupiter_swap_url=os.getenv("JUPITER_SWAP_URL", "https://quote-api.jup.ag/v6/swap"),
+        bot_username=os.getenv("BOT_USERNAME", ""),
+        admin_ids=parse_admin_ids(os.getenv("ADMIN_IDS", "")),
     )

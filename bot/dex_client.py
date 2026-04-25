@@ -12,6 +12,7 @@ from solana.rpc.types import TxOpts
 from solders.keypair import Keypair
 from solders.message import to_bytes_versioned
 from solders.pubkey import Pubkey
+from solders.signature import Signature
 from solders.transaction import VersionedTransaction
 
 
@@ -25,7 +26,13 @@ class DexClient:
         fee_accounts_path: str,
     ) -> None:
         self._rpc = Client(rpc_url)
-        self._keypair = Keypair.from_bytes(base58.b58decode(private_key_base58))
+        secret = base58.b58decode(private_key_base58)
+        if len(secret) == 64:
+            self._keypair = Keypair.from_bytes(secret)
+        elif len(secret) == 32:
+            self._keypair = Keypair.from_seed(secret)
+        else:
+            raise ValueError("SOLANA_PRIVATE_KEY_BASE58 must decode to 32 or 64 bytes")
         self._quote_url = quote_url
         self._swap_url = swap_url
         self._fee_accounts_path = fee_accounts_path
@@ -77,6 +84,8 @@ class DexClient:
             "quoteResponse": quote_response,
             "userPublicKey": self.public_key,
             "wrapAndUnwrapSol": True,
+            "dynamicComputeUnitLimit": True,
+            "prioritizationFeeLamports": "auto",
         }
 
         fee_account = self._fee_accounts.get(output_mint)
@@ -90,7 +99,7 @@ class DexClient:
 
         swap_tx = data.get("swapTransaction")
         if not swap_tx:
-            raise RuntimeError("Jupiter did not return swapTransaction")
+            raise RuntimeError(f"Jupiter did not return swapTransaction: {data}")
 
         raw_tx = VersionedTransaction.from_bytes(base64.b64decode(swap_tx))
         sig = self._keypair.sign_message(to_bytes_versioned(raw_tx.message))
@@ -99,6 +108,12 @@ class DexClient:
             bytes(signed_tx), opts=TxOpts(skip_preflight=False, preflight_commitment="confirmed")
         )
         return str(tx_sig.value)
+
+    def tx_exists(self, tx_hash: str) -> bool:
+        sig = Signature.from_string(tx_hash)
+        result = self._rpc.get_signature_statuses([sig], search_transaction_history=True)
+        val = result.value[0]
+        return val is not None
 
 
 def to_atomic(amount_ui: float, decimals: int) -> int:
@@ -112,4 +127,7 @@ def parse_mint_and_decimals(mint_arg: str) -> tuple[str, int]:
         raise ValueError("Mint format must be <mint_address>:<decimals>")
     mint, decimals = mint_arg.split(":", 1)
     _ = Pubkey.from_string(mint)
-    return mint, int(decimals)
+    d = int(decimals)
+    if d < 0 or d > 12:
+        raise ValueError("decimals out of range (0-12)")
+    return mint, d

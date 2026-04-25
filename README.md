@@ -61,6 +61,31 @@ python bot/main.py
 - `FEE_MIN_BPS`
 - `FEE_MAX_BPS`
 - `DEFAULT_FEE_BPS`
+- `BOT_USERNAME`
+- `ADMIN_IDS`
+
+## 闭环能力升级（本次新增）
+
+围绕你提出的“EACO 在虚拟宇宙流通 + 全球社区运营闭环”，本次代码把机器人升级为以下能力：
+
+1. **链上交易闭环**
+   - `/quote` + `/swap` 继续走 Jupiter 聚合路由，支持 Solana 代币对换。
+   - 增加滑点边界检查（10~500 bps）和交易日志记录（成功/失败）。
+2. **多用户运营闭环**
+   - 多用户资料扩展：`username / language / referral_code / invited_by / wallet_verified / volunteer_status`。
+   - 支持邀请裂变：`/invite`、`/myref`，自动统计拉新人数。
+3. **钱包确权闭环**
+   - `/verifywallet <wallet>` 发起确权挑战，生成 `verify_id` 与挑战数量。
+   - `/verifytx <verify_id> <tx_hash>` 提交链上证明，管理员 `/approve_verify` 审核通过。
+4. **多语言入口**
+   - `/setlang <en|zh|es|ar|fr|ru|ja>`，中英文帮助文案已落地，其他语种可继续扩充。
+5. **志愿者 + 退款条款闭环**
+   - `/volunteer_apply` 申请 1~6 个月考核周期。
+   - `/refund_policy` 输出履约退款条款说明。
+6. **管理后台最小闭环**
+   - `/stats`（admin only）查看用户、邀请、确权、交易成功数。
+
+> 说明：你给的 ChatGPT share 链接是登录墙页面，自动化环境无法直接读取正文；`whitepaper` 页面可访问标题但正文为前端动态渲染。当前改造依据你在仓库和对话中给出的 EACO 规则落地。
 
 ---
 
