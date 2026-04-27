@@ -37,6 +37,7 @@ python bot/main.py
 - `/setfee <15-75>` 设置手续费 bps
 - `/quote <inputMint:decimals> <outputMint:decimals> <amount> [slippageBps]`
 - `/swap <inputMint:decimals> <outputMint:decimals> <amount> [slippageBps]`
+- `/roadmap` 查看“EACO 成为海外 WEB3/WEB4 支付基础货币之一”的路线摘要
 
 示例：
 
@@ -51,6 +52,7 @@ python bot/main.py
 - `bot/storage.py` 多用户与费率持久化
 - `bot/config.py` 环境变量配置加载
 - `requirements.txt` 依赖
+- `docs/eaco-overseas-web3-web4-payment-plan.md` 海外支付发展方案
 
 ## 费用范围
 

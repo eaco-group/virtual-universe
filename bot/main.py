@@ -31,7 +31,8 @@ HELP = {
         "/verifywallet <wallet> - start wallet ownership challenge\n"
         "/verifytx <verify_id> <tx_hash> - submit proof tx\n"
         "/volunteer_apply - apply for 1-6 month volunteer cycle\n"
-        "/refund_policy - show refund clause"
+        "/refund_policy - show refund clause\n"
+        "/roadmap - show overseas WEB3/WEB4 payment expansion roadmap"
     ),
     "zh": (
         "EACO DEX 机器人命令：\n"
@@ -48,7 +49,8 @@ HELP = {
         "/verifywallet <钱包> - 发起钱包确权挑战\n"
         "/verifytx <验证ID> <tx_hash> - 提交链上证明\n"
         "/volunteer_apply - 申请1-6个月志愿者考核\n"
-        "/refund_policy - 查看退款条款"
+        "/refund_policy - 查看退款条款\n"
+        "/roadmap - 查看海外WEB3/WEB4支付发展路线"
     ),
 }
 
@@ -57,6 +59,18 @@ REFUND_POLICY = (
     "1) If paid promotion/liquidity tasks are not executed as agreed, partner should refund fully/partially.\n"
     "2) Evidence must be on-chain or with auditable logs.\n"
     "3) Volunteer cycle is 1-6 months with measurable KPIs.\n"
+)
+
+ROADMAP = (
+    "EACO Overseas WEB3/WEB4 Payment Roadmap:\n"
+    "1) Liquidity: deepen E/SOL + E/USDT pools and market-maker policy.\n"
+    "2) SDK: complete web4sdk payment APIs (quote/pay/refund/webhook).\n"
+    "3) Merchant: plugins for Shopify/WooCommerce/Telegram MiniApp.\n"
+    "4) Compliance: KYC/AML risk tiers + sanctions screening.\n"
+    "5) Trust: wallet ownership verification + proof-of-reserve dashboard.\n"
+    "6) Growth: multilingual referral + ambassador KPI program.\n"
+    "7) Treasury: fee split to LP rewards, buyback/burn, ecosystem grants.\n"
+    "8) Product: subscription billing, escrow, and cross-border settlement.\n"
 )
 
 settings = load_settings()
@@ -260,6 +274,11 @@ async def volunteer_apply_cmd(message: Message) -> None:
 @dp.message(Command("refund_policy"))
 async def refund_policy_cmd(message: Message) -> None:
     await message.answer(REFUND_POLICY)
+
+
+@dp.message(Command("roadmap"))
+async def roadmap_cmd(message: Message) -> None:
+    await message.answer(ROADMAP)
 
 
 @dp.message(Command("stats"))
