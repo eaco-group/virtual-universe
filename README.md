@@ -1,4 +1,7 @@
-﻿# Virtual Universe
+# Virtual Universe
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Discord](https://img.shields.io/discord/HWsweV6fFy?label=Discord&logo=discord)](https://discord.gg/HWsweV6fFy)
 
 A project exploring how EACO integrates with the virtual universe and facilitates circulation and usage within it.
 
@@ -10,6 +13,15 @@ EACO ($eaco) is an innovative community currency — the only $eaco in the unive
 - **Mission:** Promote environmental protection and sustainable development, integrate decentralized finance and digital assets, and become a representative of future personal core assets.
 - **Tagline:** EACO — Earth's Best Coin
 - **Community:** [Discord](https://discord.gg/HWsweV6fFy)
+
+## Repository Structure
+
+```
+virtual-universe/
+├── .gitignore    # Standard ignore rules
+├── LICENSE       # MIT License
+└── README.md     # Project documentation
+```
 
 ## Installation
 

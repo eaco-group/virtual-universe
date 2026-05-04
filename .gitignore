@@ -1,4 +1,4 @@
-﻿# OS generated files
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
@@ -25,8 +25,12 @@ vendor/
 # Build outputs
 dist/
 build/
+out/
+target/
 *.exe
 *.dll
+*.so
+*.dylib
 
 # Environment variables
 .env
@@ -42,6 +46,21 @@ __pycache__/
 env/
 venv/
 ENV/
+*.egg-info/
+.eggs/
+
+# Go
+*.test
+*.prof
+vendor/
+go.sum
+
+# Rust
+Cargo.lock
+target/
+
+# Docker
+docker-compose.override.yml
 
 # IDE
 *.iml
@@ -51,6 +70,14 @@ ENV/
 # Testing
 coverage/
 .nyc_output/
+.pytest_cache/
+htmlcov/
+
+# Package archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
 
 # Misc
 *.cache
